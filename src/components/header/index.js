@@ -10,7 +10,7 @@ class Header extends Component {
         <h1 className="App-title">UMAI Interest Calculator</h1>
         <ul>
           <li>
-            <Link to={`/`}>Simple Interest</Link>
+            <Link to={`/simple`}>Simple Interest</Link>
           </li>
           <li>
             <Link to={`/complex`}>Complex Interest</Link>
