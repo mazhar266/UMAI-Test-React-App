@@ -1,2 +1,8 @@
-# umai-test-react-app
-The sample react app for UMAI
+## Umai Sample Reactjs app
+
+Technologies used:
+
+- Reactjs
+- Redux
+- React Router
+- SASS
