@@ -8,3 +8,6 @@
   .compound-interest h2 {
     margin-bottom: 30px;
     font-weight: normal; }
+  .compound-interest .small-text {
+    color: #555;
+    font-size: 14px; }

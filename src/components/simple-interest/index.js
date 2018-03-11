@@ -48,7 +48,7 @@ class SimpleInterest extends Component {
 
     this.props.updateSimpleInterest({
       principal: this.props.simpleInterest.principal,
-      rate: rate,
+      rate: this.props.simpleInterest.rate,
       time: this.props.simpleInterest.time,
       interest: interest
     });
@@ -68,7 +68,7 @@ class SimpleInterest extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="rate">Rate (R): % (per year)</label>
-            <input type="number" required min="0.1" max="100" step="0.01"
+            <input type="number" required min="0.01" max="100" step="0.01"
               className="form-control" id="rate" onChange={this.updateRate} value={this.props.simpleInterest.rate}/>
           </div>
           <div className="form-group">
