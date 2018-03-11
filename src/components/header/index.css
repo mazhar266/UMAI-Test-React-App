@@ -5,17 +5,16 @@ header ul {
   header ul li {
     display: inline-block;
     padding: 0;
-    padding-right: 50px; }
+    padding-right: 48px; }
     header ul li:last-child {
       padding-right: 0; }
     header ul li a {
-      color: #ff0;
-      text-decoration: none; }
-      header ul li a::before {
-        content: '>';
-        position: relative;
-        left: -10px;
-        top: -1px;
-        color: transparent; }
-      header ul li a:hover::before, header ul li a:focus::before, header ul li a:active::before {
-        color: inherit; }
+      color: #fff;
+      text-decoration: none;
+      -webkit-transition: all 200ms ease;
+      -moz-transition: all 200ms ease;
+      -ms-transition: all 200ms ease;
+      -o-transition: all 200ms ease;
+      transition: all 200ms ease; }
+      header ul li a:hover, header ul li a:focus, header ul li a:active {
+        border-bottom: 1px solid; }
