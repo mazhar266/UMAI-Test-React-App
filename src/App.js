@@ -7,7 +7,7 @@ import {
 import './App.css';
 import Header from './components/header';
 import SimpleInterest from './components/simple-interest';
-import ComplexInterest from './components/complex-interest';
+import CompoundInterest from './components/compound-interest';
 import WelcomePage from './components/welcome-page';
 
 class App extends Component {
@@ -19,7 +19,7 @@ class App extends Component {
           <div className="App-intro">
             <Route exact path="/" component={WelcomePage}/>
             <Route path="/simple" component={SimpleInterest}/>
-            <Route path="/complex" component={ComplexInterest}/>
+            <Route path="/compound" component={CompoundInterest}/>
           </div>
         </div>
       </Router>

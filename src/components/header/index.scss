@@ -25,6 +25,8 @@ header {
         transition: all 200ms ease;
 
         &:hover, &:focus, &:active {
+          color: #fff;
+          text-decoration: none;
           border-bottom: 1px solid;
         }
       }

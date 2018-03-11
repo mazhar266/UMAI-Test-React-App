@@ -1,0 +1,10 @@
+.simple-interest {
+  display: block;
+  width: 420px;
+  max-width: 100%;
+  margin: auto;
+  padding: 20px;
+  text-align: left; }
+  .simple-interest h2 {
+    margin-bottom: 30px;
+    font-weight: normal; }

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import './index.css';
 
 class WelcomePage extends Component {
   render() {
     return (
-      <div>Welcome Page</div>
+      <div className="welcome-page">
+        <h2>Welcome to</h2>
+        <h4>UMAI Interest Calculator</h4>
+      </div>
     );
   }
 }

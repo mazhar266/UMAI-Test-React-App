@@ -13,7 +13,7 @@ class Header extends Component {
             <Link to={`/simple`}>Simple Interest</Link>
           </li>
           <li>
-            <Link to={`/complex`}>Complex Interest</Link>
+            <Link to={`/compound`}>Compound Interest</Link>
           </li>
         </ul>
       </header>
