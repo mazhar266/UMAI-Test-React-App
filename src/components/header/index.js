@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import './index.css';
 
 
@@ -9,10 +10,10 @@ class Header extends Component {
         <h1 className="App-title">UMAI Interest Calculator</h1>
         <ul>
           <li>
-            <a href="">Simple Interest</a>
+            <Link to={`/`}>Simple Interest</Link>
           </li>
           <li>
-            <a href="">Complex Interest</a>
+            <Link to={`/complex`}>Complex Interest</Link>
           </li>
         </ul>
       </header>
