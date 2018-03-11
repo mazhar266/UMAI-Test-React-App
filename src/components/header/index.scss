@@ -1,0 +1,37 @@
+header {
+
+  ul {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      padding: 0;
+      padding-right: 50px;
+
+      &:last-child {
+        padding-right: 0;
+      }
+
+      a {
+        color: #ff0;
+        text-decoration: none;
+
+        &::before {
+          content: '>';
+          position: relative;
+          left: -10px;
+          top: -1px;
+          color: transparent;
+        }
+
+        &:hover, &:focus, &:active {
+          &::before {
+            color: inherit;
+          }
+        }
+      }
+    }
+  }
+}
