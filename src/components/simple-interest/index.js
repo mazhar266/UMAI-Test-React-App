@@ -110,15 +110,17 @@ class SimpleInterest extends Component {
   }
 
   renderChart = () => {
-    return this.props.simpleInterest.interest.map((item) => {
-      return (
-        <tr key={item.year}>
-          <td>{item.year}</td>
-          <td>{item.interest.toFixed(2)}</td>
-          <td className="align-right">{item.total.toFixed(2)}</td>
-        </tr>
-      )
-    });
+    if (this.props.simpleInterest.interest.length) {
+      return this.props.simpleInterest.interest.map((item) => {
+        return (
+          <tr key={item.year}>
+            <td>{item.year}</td>
+            <td>{item.interest.toFixed(2)}</td>
+            <td className="align-right">{item.total.toFixed(2)}</td>
+          </tr>
+        )
+      });
+    }
   }
 
   renderError = () => {
@@ -128,6 +130,25 @@ class SimpleInterest extends Component {
           {this.props.simpleInterest.error}
         </div>
       )
+    }
+  }
+
+  renderTable = () => {
+    if (this.props.simpleInterest.interest.length) {
+      return (
+        <table width="100%">
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Interest</th>
+              <th className="align-right">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.renderChart()}
+          </tbody>
+        </table>
+      );
     }
   }
 
@@ -155,18 +176,7 @@ class SimpleInterest extends Component {
           <button type="submit" className="btn btn-primary form-control m-t">Calculate</button>
         </form>
         <div className="m-t-lg result-chart">
-          <table width="100%">
-            <thead>
-              <tr>
-                <th>Year</th>
-                <th>Interest</th>
-                <th className="align-right">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.renderChart()}
-            </tbody>
-          </table>
+          {this.renderTable()}
         </div>
       </div>
     );
