@@ -19,6 +19,7 @@ class SimpleInterest extends Component {
       principal: event.target.value,
       rate: this.props.simpleInterest.rate,
       time: this.props.simpleInterest.time,
+      error: false,
       interest: this.props.simpleInterest.interest
     });
   }
@@ -28,6 +29,7 @@ class SimpleInterest extends Component {
       principal: this.props.simpleInterest.principal,
       rate: event.target.value,
       time: this.props.simpleInterest.time,
+      error: false,
       interest: this.props.simpleInterest.interest
     });
   }
@@ -37,6 +39,7 @@ class SimpleInterest extends Component {
       principal: this.props.simpleInterest.principal,
       rate: this.props.simpleInterest.rate,
       time: event.target.value,
+      error: false,
       interest: this.props.simpleInterest.interest
     });
   }
@@ -49,7 +52,8 @@ class SimpleInterest extends Component {
         principal: this.props.simpleInterest.principal,
         rate: this.props.simpleInterest.rate,
         time: this.props.simpleInterest.time,
-        interest: 'Invalid Rate'
+        error: 'Invalid Rate',
+        interest: this.props.simpleInterest.interest
       });
       return false;
     }
@@ -60,7 +64,8 @@ class SimpleInterest extends Component {
         principal: this.props.simpleInterest.principal,
         rate: this.props.simpleInterest.rate,
         time: this.props.simpleInterest.time,
-        interest: 'Invalid Principal'
+        error: 'Invalid Principal',
+        interest: this.props.simpleInterest.interest
       });
       return false;
     }
@@ -71,30 +76,66 @@ class SimpleInterest extends Component {
         principal: this.props.simpleInterest.principal,
         rate: this.props.simpleInterest.rate,
         time: this.props.simpleInterest.time,
-        interest: 'Invalid Time'
+        error: 'Invalid Time',
+        interest: this.props.simpleInterest.interest
       });
       return false;
     }
 
     // calculate
-    let rate = this.props.simpleInterest.rate / 100;
-    let interest = this.props.simpleInterest.principal * (1 + (rate * this.props.simpleInterest.time));
+    let interestChart = [];
+    let previousAmount = this.props.simpleInterest.principal;
+    for (let i = 0; i < this.props.simpleInterest.time; i++)
+    {
+      let rate = this.props.simpleInterest.rate / 100;
+      let interest = this.props.simpleInterest.principal * (1 + (rate * (i + 1)));
+      interestChart.push({
+        year: i + 1,
+        interest: interest - previousAmount,
+        total: interest
+      });
+      previousAmount = interest;
+    }
 
     // set the values
     this.props.updateSimpleInterest({
       principal: this.props.simpleInterest.principal,
       rate: this.props.simpleInterest.rate,
       time: this.props.simpleInterest.time,
-      interest: '$ ' + interest.toFixed(2)
+      error: false,
+      interest: interestChart
     });
 
     return false;
+  }
+
+  renderChart = () => {
+    return this.props.simpleInterest.interest.map((item) => {
+      return (
+        <tr key={item.year}>
+          <td>{item.year}</td>
+          <td>{item.interest.toFixed(2)}</td>
+          <td className="align-right">{item.total.toFixed(2)}</td>
+        </tr>
+      )
+    });
+  }
+
+  renderError = () => {
+    if (this.props.simpleInterest.error) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          {this.props.simpleInterest.error}
+        </div>
+      )
+    }
   }
 
   render() {
     return (
       <div className="simple-interest">
         <h2>Simple Interest</h2>
+        {this.renderError()}
         <form action="" method="post" onSubmit={this.calculateInterest}>
           <div className="form-group">
             <label htmlFor="principal">Principal (P): $</label>
@@ -113,7 +154,20 @@ class SimpleInterest extends Component {
           </div>
           <button type="submit" className="btn btn-primary form-control m-t">Calculate</button>
         </form>
-        <h1 className="m-y">{this.props.simpleInterest.interest}</h1>
+        <div className="m-t-lg result-chart">
+          <table width="100%">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Interest</th>
+                <th className="align-right">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.renderChart()}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }
