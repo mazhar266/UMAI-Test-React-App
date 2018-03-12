@@ -43,14 +43,49 @@ class SimpleInterest extends Component {
 
   calculateInterest = (event) => {
     event.preventDefault();
+    // check the rate first
+    if (this.props.simpleInterest.rate < 0 || this.props.simpleInterest.rate > 100) {
+      this.props.updateSimpleInterest({
+        principal: this.props.simpleInterest.principal,
+        rate: this.props.simpleInterest.rate,
+        time: this.props.simpleInterest.time,
+        interest: 'Invalid Rate'
+      });
+      return false;
+    }
+
+    // now check the principal
+    if (this.props.simpleInterest.principal < 0) {
+      this.props.updateSimpleInterest({
+        principal: this.props.simpleInterest.principal,
+        rate: this.props.simpleInterest.rate,
+        time: this.props.simpleInterest.time,
+        interest: 'Invalid Principal'
+      });
+      return false;
+    }
+
+    // now check the time
+    if (this.props.simpleInterest.time < 0) {
+      this.props.updateSimpleInterest({
+        principal: this.props.simpleInterest.principal,
+        rate: this.props.simpleInterest.rate,
+        time: this.props.simpleInterest.time,
+        interest: 'Invalid Time'
+      });
+      return false;
+    }
+
+    // calculate
     let rate = this.props.simpleInterest.rate / 100;
     let interest = this.props.simpleInterest.principal * (1 + (rate * this.props.simpleInterest.time));
 
+    // set the values
     this.props.updateSimpleInterest({
       principal: this.props.simpleInterest.principal,
       rate: this.props.simpleInterest.rate,
       time: this.props.simpleInterest.time,
-      interest: interest
+      interest: '$ ' + interest.toFixed(2)
     });
 
     return false;
@@ -68,17 +103,17 @@ class SimpleInterest extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="rate">Rate (R): % (per year)</label>
-            <input type="number" required min="0.01" max="100" step="0.01"
+            <input type="number" required min="0" max="100" step="0.01"
               className="form-control" id="rate" onChange={this.updateRate} value={this.props.simpleInterest.rate}/>
           </div>
           <div className="form-group">
             <label htmlFor="time">Time (t) (in year):</label>
-            <input type="number" min="1" required className="form-control"
+            <input type="number" min="0" required className="form-control"
               id="time" onChange={this.updateTime} value={this.props.simpleInterest.time}/>
           </div>
           <button type="submit" className="btn btn-primary form-control m-t">Calculate</button>
         </form>
-        <h1 className="m-y">$ {this.props.simpleInterest.interest.toFixed(2)}</h1>
+        <h1 className="m-y">{this.props.simpleInterest.interest}</h1>
       </div>
     );
   }

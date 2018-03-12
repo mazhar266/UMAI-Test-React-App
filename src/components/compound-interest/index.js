@@ -43,14 +43,49 @@ class CompoundInterest extends Component {
 
   calculateInterest = (event) => {
     event.preventDefault();
+    // first check the rate
+    if (this.props.compoundInterest.rate < 0 || this.props.compoundInterest.rate > 100) {
+      this.props.updateCompoundInterest({
+        principal: this.props.compoundInterest.principal,
+        rate: this.props.compoundInterest.rate,
+        time: this.props.compoundInterest.time,
+        interest: 'Invalid Rate'
+      });
+      return false;
+    }
+
+    // now check the principal
+    if (this.props.compoundInterest.principal < 0) {
+      this.props.updateCompoundInterest({
+        principal: this.props.compoundInterest.principal,
+        rate: this.props.compoundInterest.rate,
+        time: this.props.compoundInterest.time,
+        interest: 'Invalid Principal'
+      });
+      return false;
+    }
+
+    // now check the time
+    if (this.props.compoundInterest.time < 0) {
+      this.props.updateCompoundInterest({
+        principal: this.props.compoundInterest.principal,
+        rate: this.props.compoundInterest.rate,
+        time: this.props.compoundInterest.time,
+        interest: 'Invalid Time'
+      });
+      return false;
+    }
+
+    // calculate
     let rate = this.props.compoundInterest.rate / 100;
     let interest = this.props.compoundInterest.principal * Math.pow(1 + rate, this.props.compoundInterest.time);
 
+    // set the values
     this.props.updateCompoundInterest({
       principal: this.props.compoundInterest.principal,
       rate: this.props.compoundInterest.rate,
       time: this.props.compoundInterest.time,
-      interest: interest
+      interest: '$ ' + interest.toFixed(2)
     });
 
     return false;
@@ -68,7 +103,7 @@ class CompoundInterest extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="rate">Rate (R): % (per year)</label>
-            <input type="number" required min="0.01" max="100" step="0.01"
+            <input type="number" required min="0" max="100" step="0.01"
               className="form-control" id="rate" onChange={this.updateRate} value={this.props.compoundInterest.rate}/>
           </div>
           <div className="form-group">
@@ -76,12 +111,12 @@ class CompoundInterest extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="time">Time (t) (in year):</label>
-            <input type="number" min="1" required className="form-control"
+            <input type="number" min="0" required className="form-control"
               id="time" onChange={this.updateTime} value={this.props.compoundInterest.time}/>
           </div>
           <button type="submit" className="btn btn-primary form-control m-t">Calculate</button>
         </form>
-        <h1 className="m-y">$ {this.props.compoundInterest.interest.toFixed(2)}</h1>
+        <h1 className="m-y">{this.props.compoundInterest.interest}</h1>
       </div>
     );
   }
