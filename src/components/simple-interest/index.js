@@ -115,8 +115,8 @@ class SimpleInterest extends Component {
         return (
           <tr key={item.year}>
             <td>{item.year}</td>
-            <td>{item.interest.toFixed(2)}</td>
-            <td className="align-right">{item.total.toFixed(2)}</td>
+            <td>$ {item.interest.toFixed(2)}</td>
+            <td className="align-right">$ {item.total.toFixed(2)}</td>
           </tr>
         )
       });
