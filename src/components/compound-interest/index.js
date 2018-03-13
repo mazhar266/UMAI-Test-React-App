@@ -155,7 +155,7 @@ class CompoundInterest extends Component {
   renderTable = () => {
     if (this.props.compoundInterest.interest.length) {
       return (
-        <table width="100%">
+        <table width="100%" className="table table-striped">
           <thead>
             <tr>
               <th>Year</th>
@@ -211,7 +211,7 @@ class CompoundInterest extends Component {
           </div>
           <button type="submit" className="btn btn-primary form-control m-t">Calculate</button>
         </form>
-        <div className="m-t-lg result-chart">
+        <div className="m-t-lg result-chart table-responsive">
           {this.renderTable()}
         </div>
       </div>
